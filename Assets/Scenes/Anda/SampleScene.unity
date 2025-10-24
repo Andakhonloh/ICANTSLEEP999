@@ -1565,7 +1565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   currentStamina: 0
-  decreaseDuration: 300
+  decreaseDuration: 20
   staminaBar: {fileID: 166743390}
   player: {fileID: 553419937}
   gameOverSceneName: GameOver
