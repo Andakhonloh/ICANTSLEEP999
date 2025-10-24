@@ -2,28 +2,35 @@ using UnityEngine;
 
 public class Itempichup : MonoBehaviour
 {
+    [Header("Pickup Settings")]
     public float pickupRange = 2f;
     public float staminaIncrease = 60f;
+
+    [Header("References")]
+    public GameObject interactUI;          // UI ตัว E ให้แสดงเมื่ออยู่ใกล้
+    public GameObject cutsceneObject;      // ใส่ Cutscene Object ใน Inspector
+
     private Transform player;
     private bool isInRange = false;
 
     private static int itemsCollected = 0;
     public static int itemsToCollect = 3;
 
-    private UIStamina staminaSystem; // ✅ ใช้ชื่อคลาสที่ถูกต้อง
-    public GameObject cutsceneObject;    // ใส่ Cutscene ที่นี่ (ตั้งค่าใน Inspector)
+    private UIStamina staminaSystem;
 
     void Start()
     {
-        // หา Player ใน Scene (ต้องมี Tag = "Player")
+        // หา Player
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
-        {
             player = playerObject.transform;
-        }
 
-        // หา StaminaSystem ใน Scene
+        // หา StaminaSystem
         staminaSystem = FindObjectOfType<UIStamina>();
+
+        // เริ่มต้นซ่อน UI
+        if (interactUI != null)
+            interactUI.SetActive(false);
     }
 
     void Update()
@@ -33,6 +40,11 @@ public class Itempichup : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
         isInRange = distance <= pickupRange;
 
+        // แสดงหรือซ่อน UI ตัว E
+        if (interactUI != null)
+            interactUI.SetActive(isInRange);
+
+        // ถ้าอยู่ในระยะและกด E
         if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
             CollectItem();
@@ -42,14 +54,12 @@ public class Itempichup : MonoBehaviour
     void CollectItem()
     {
         if (staminaSystem != null)
-        {
             staminaSystem.AddStamina(staminaIncrease);
-        }
 
         itemsCollected++;
         Debug.Log($"เก็บของแล้ว {itemsCollected}/{itemsToCollect}");
 
-        Destroy(gameObject);
+        Destroy(gameObject); // ทำให้ไอเท็มหายไป
 
         if (itemsCollected >= itemsToCollect)
         {

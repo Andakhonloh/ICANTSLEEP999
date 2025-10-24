@@ -1,24 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Restart : MonoBehaviour
+public class ChangeSceneButton : MonoBehaviour
 {
-    [Header("ชื่อ Scene สำหรับเริ่มใหม่")]
-    public string sceneToRestart = "SampleScene"; // ตั้งชื่อฉากหลักของอันดาได้เลย
+    [Header("ชื่อ Scene ที่ต้องการเปลี่ยนไป")]
+    public string sceneName; // ใส่ชื่อ Scene ได้ใน Inspector
 
-    public void RestartGame()
+    public void ChangeScene()
     {
-        SceneManager.LoadScene(sceneToRestart);
-    }
-
-    public void ExitGame()
-    {
-        Debug.Log("Exit Game");
-        Application.Quit();
-
-        // ใช้ตอนทดสอบใน Unity Editor
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        // ตรวจว่าชื่อ Scene ไม่ว่าง
+        if (!string.IsNullOrEmpty(sceneName))
+        {
+            SceneManager.LoadScene(sceneName);
+            Debug.Log("กำลังเปลี่ยนไปที่ฉาก: " + sceneName);
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ กรุณาใส่ชื่อ Scene ใน Inspector ก่อน!");
+        }
     }
 }
