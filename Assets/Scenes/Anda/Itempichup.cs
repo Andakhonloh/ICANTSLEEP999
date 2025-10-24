@@ -7,8 +7,8 @@ public class Itempichup : MonoBehaviour
     public float staminaIncrease = 60f;
 
     [Header("References")]
-    public GameObject interactUI;          // UI ตัว E ให้แสดงเมื่ออยู่ใกล้
-    public GameObject cutsceneObject;      // ใส่ Cutscene Object ใน Inspector
+    public GameObject interactUI;        // UI ตัว E ให้แสดงเมื่ออยู่ใกล้
+    public GameObject cutsceneObject;    // ใส่ Cutscene Object ใน Inspector
 
     private Transform player;
     private bool isInRange = false;
@@ -25,8 +25,8 @@ public class Itempichup : MonoBehaviour
         if (playerObject != null)
             player = playerObject.transform;
 
-        // หา StaminaSystem
-        staminaSystem = FindObjectOfType<UIStamina>();
+        // หา StaminaSystem (*** นี่คือบรรทัดที่แก้ไขแล้ว ***)
+        staminaSystem = FindFirstObjectByType<UIStamina>();
 
         // เริ่มต้นซ่อน UI
         if (interactUI != null)
