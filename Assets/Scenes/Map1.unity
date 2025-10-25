@@ -23649,7 +23649,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 84581221198817217, guid: 71483b4b0af4cfd46917a8236e3e4ded, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.092736
+      value: 12.093
       objectReference: {fileID: 0}
     - target: {fileID: 84581221198817217, guid: 71483b4b0af4cfd46917a8236e3e4ded, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23657,7 +23657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 84581221198817217, guid: 71483b4b0af4cfd46917a8236e3e4ded, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.002106
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 84581221198817217, guid: 71483b4b0af4cfd46917a8236e3e4ded, type: 3}
       propertyPath: m_LocalRotation.w
@@ -23690,6 +23690,14 @@ PrefabInstance:
     - target: {fileID: 2023093363407717347, guid: 71483b4b0af4cfd46917a8236e3e4ded, type: 3}
       propertyPath: m_Name
       value: LightSwitch_Prefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620654617334627401, guid: 71483b4b0af4cfd46917a8236e3e4ded, type: 3}
+      propertyPath: m_Size.z
+      value: 0.060193628
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620654617334627401, guid: 71483b4b0af4cfd46917a8236e3e4ded, type: 3}
+      propertyPath: m_Center.z
+      value: 0.118249245
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
