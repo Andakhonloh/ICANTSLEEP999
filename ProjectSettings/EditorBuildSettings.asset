@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Anda/Start.unity
     guid: 778fbf98ce3bb41499c6d9f60009c6d6
   - enabled: 1
+    path: Assets/Scenes/Map1.unity
+    guid: adf6dc06c2d36c4439921c07383703c5
+  - enabled: 1
     path: Assets/Scenes/Anda/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
