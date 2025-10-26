@@ -16,49 +16,52 @@ public class PlayerInteract : MonoBehaviour
 
     void Update()
     {
-        // === เพิ่มเข้ามาใหม่ (1) ===
-        // วาดเส้นเลเซอร์ "สีเขียว" ในหน้าต่าง Scene (ซีน)
-        // เพื่อให้เรา "เห็น" ว่าเลเซอร์ยิงไปทางไหน (ต้องเปิด Gizmos (กิซ-โม่) ในหน้าต่าง Game (เกม) ถึงจะเห็น)
+        // วาดเลเซอร์สีเขียว (สำหรับ Debug (ดีบัก))
         Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * interactRange, Color.green);
-        // === จบส่วนเพิ่มใหม่ (1) ===
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            // === เพิ่มเข้ามาใหม่ (2) ===
-            // ตะโกนบอกเราว่า "กด E แล้วนะ!"
             Debug.Log("--- กดปุ่ม E แล้ว ---");
-            // === จบส่วนเพิ่มใหม่ (2) ===
 
             Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, interactRange))
             {
-                // === เพิ่มเข้ามาใหม่ (3) ===
-                // ตะโกนบอกเราว่า "เลเซอร์ชนอะไรบางอย่าง"
-                // hit.collider.name คือ "ชื่อ" ของวัตถุที่ชน
                 Debug.Log("เลเซอร์ชน: " + hit.collider.name);
-                // === จบส่วนเพิ่มใหม่ (3) ===
 
+                // (เช็กที่ 1) เช็กสวิตช์ไฟ
                 if (hit.collider.TryGetComponent(out LightSwitch lightSwitch))
                 {
                     Debug.Log("...เจอสคริปต์ LightSwitch! กำลังสั่ง Interact()...");
                     lightSwitch.Interact();
                 }
+
+                // --- (อัปเกรดแล้ว!) ---
+                // (เช็กที่ 2) "หรือถ้า" (else if) ลองหา "ประตู" บนตัวมันเอง
+                else if (hit.collider.TryGetComponent(out DoorController doorOnSelf))
+                {
+                    Debug.Log("...เจอสคริปต์ DoorController! (บน " + hit.collider.name + ") กำลังสั่ง Interact()...");
+                    doorOnSelf.Interact();
+                }
+                // (เช็กที่ 3) "หรือถ้า" (else if) ลองหา "ประตู" บน "ตัวแม่" (Parent)
+                // (GetComponentInParent คือการ "ค้นหาในตัวแม่")
+                else if (hit.collider.GetComponentInParent<DoorController>() != null)
+                {
+                    // เราต้องเรียก GetComponentInParent() อีกครั้งเพื่อสั่งการ
+                    Debug.Log("...เจอสคริปต์ DoorController! (บน Parent) กำลังสั่ง Interact()...");
+                    hit.collider.GetComponentInParent<DoorController>().Interact();
+                }
+                // --- (จบส่วนอัปเกรด) ---
+
                 else
                 {
-                    // === เพิ่มเข้ามาใหม่ (4) ===
-                    // ตะโกนบอกว่า "ชนแล้ว แต่... ไม่มีสคริปต์ LightSwitch"
-                    Debug.Log("...แต่บน " + hit.collider.name + " ไม่มีสคริปต์ LightSwitch");
-                    // === จบส่วนเพิ่มใหม่ (4) ===
+                    Debug.Log("...แต่บน " + hit.collider.name + " หรือ Parent ของมัน ไม่มีสคริปต์ที่ Interact (ปฏิสัมพันธ์) ได้");
                 }
             }
             else
             {
-                // === เพิ่มเข้ามาใหม่ (5) ===
-                // ตะโกนบอกว่า "ยิงเลเซอร์แล้ว... แต่ไม่ชนอะไรเลย"
                 Debug.Log("เลเซอร์ไม่ชนอะไรเลย (ยิงทะลุ/ระยะไม่ถึง)");
-                // === จบส่วนเพิ่มใหม่ (5) ===
             }
         }
     }
