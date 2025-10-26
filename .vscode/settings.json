@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Shichok.sln"
+    "dotnet.defaultSolution": "ICANTSLEEP999.sln"
 }
